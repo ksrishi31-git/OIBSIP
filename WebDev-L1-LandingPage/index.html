@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WanderIndia - Explore Beautiful India</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+    .navbar {
+      background-color: #1a1a2e;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar .logo {
+      color: #e94560;
+      font-size: 24px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+    }
+    .navbar ul li a:hover {
+      color: #e94560;
+    }
+    .navbar .nav-btn {
+      background-color: #e94560;
+      color: white;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .navbar .nav-btn:hover {
+      background-color: #c73652;
+    }
+    .hero {
+      background-color: #16213e;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+    }
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 15px;
+      color: #f5f5f5;
+    }
+    .hero h1 span {
+      color: #e94560;
+    }
+    .hero p {
+      font-size: 18px;
+      color: #aaa;
+      margin-bottom: 35px;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    .btn-main {
+      background-color: #e94560;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 15px;
+    }
+    .btn-main:hover {
+      background-color: #c73652;
+    }
+    .btn-outline {
+      border: 2px solid white;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 15px;
+    }
+    .btn-outline:hover {
+      background-color: white;
+      color: #16213e;
+    }
+    .stats-bar {
+      background-color: #e94560;
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      padding: 25px 40px;
+      text-align: center;
+    }
+    .stats-bar .stat h2 {
+      font-size: 30px;
+      color: white;
+    }
+    .stats-bar .stat p {
+      color: #ffd;
+      font-size: 13px;
+      margin-top: 3px;
+    }
+    .destinations {
+      padding: 70px 40px;
+      background-color: #f9f9f9;
+      text-align: center;
+    }
+    .destinations h2 {
+      font-size: 34px;
+      margin-bottom: 8px;
+      color: #1a1a2e;
+    }
+    .destinations .subtitle {
+      color: #777;
+      margin-bottom: 40px;
+      font-size: 15px;
+    }
+    .cards-row {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      width: 270px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: left;
+    }
+    .card:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    .card-img {
+      width: 100%;
+      height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 55px;
+    }
+    .img-kerala  { background-color: #a8e6cf; }
+    .img-rajasthan { background-color: #ffd3b6; }
+    .img-kashmir { background-color: #b8d4f0; }
+    .card-body {
+      padding: 18px;
+    }
+    .card-body h3 {
+      font-size: 18px;
+      margin-bottom: 6px;
+      color: #1a1a2e;
+    }
+    .card-body p {
+      font-size: 13px;
+      color: #777;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-footer .price {
+      font-size: 18px;
+      font-weight: bold;
+      color: #e94560;
+    }
+    .card-footer .price span {
+      font-size: 12px;
+      color: #aaa;
+      font-weight: normal;
+    }
+    .card-footer a {
+      background-color: #1a1a2e;
+      color: white;
+      padding: 7px 14px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 13px;
+    }
+    .card-footer a:hover {
+      background-color: #e94560;
+    }
+    .why-us {
+      padding: 70px 40px;
+      background-color: white;
+      text-align: center;
+    }
+    .why-us h2 {
+      font-size: 34px;
+      margin-bottom: 8px;
+      color: #1a1a2e;
+    }
+    .why-us .subtitle {
+      color: #777;
+      font-size: 15px;
+      margin-bottom: 45px;
+    }
+    .features-row {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .feature-box {
+      width: 220px;
+      padding: 30px 20px;
+      border: 1.5px solid #eee;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .feature-box:hover {
+      border-color: #e94560;
+    }
+    .feature-box .icon {
+      font-size: 40px;
+      margin-bottom: 14px;
+    }
+    .feature-box h3 {
+      font-size: 16px;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+    }
+    .feature-box p {
+      font-size: 13px;
+      color: #888;
+      line-height: 1.6;
+    }
+    .how-it-works {
+      background-color: #1a1a2e;
+      color: white;
+      padding: 70px 40px;
+      text-align: center;
+    }
+    .how-it-works h2 {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+    .how-it-works .subtitle {
+      color: #aaa;
+      font-size: 15px;
+      margin-bottom: 45px;
+    }
+    .steps-row {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .step-box {
+      width: 200px;
+      text-align: center;
+    }
+    .step-box .step-num {
+      width: 50px;
+      height: 50px;
+      background-color: #e94560;
+      border-radius: 50%;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px auto;
+    }
+    .step-box h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: #f5f5f5;
+    }
+    .step-box p {
+      font-size: 13px;
+      color: #aaa;
+      line-height: 1.6;
+    }
+    .testimonials {
+      padding: 70px 40px;
+      background-color: #f9f9f9;
+      text-align: center;
+    }
+    .testimonials h2 {
+      font-size: 34px;
+      margin-bottom: 8px;
+      color: #1a1a2e;
+    }
+    .testimonials .subtitle {
+      color: #777;
+      font-size: 15px;
+      margin-bottom: 45px;
+    }
+    .review-row {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+    .review-card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 25px;
+      width: 280px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      text-align: left;
+    }
+    .review-card .stars {
+      color: #f5a623;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .review-card p {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 15px;
+    }
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .reviewer .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #1a1a2e;
+      color: white;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .reviewer .name {
+      font-weight: bold;
+      font-size: 14px;
+      color: #1a1a2e;
+    }
+    .reviewer .city {
+      font-size: 12px;
+      color: #aaa;
+    }
+    .newsletter {
+      background-color: #e94560;
+      padding: 60px 40px;
+      text-align: center;
+      color: white;
+    }
+    .newsletter h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    .newsletter p {
+      font-size: 15px;
+      margin-bottom: 25px;
+      color: #fdd;
+    }
+    .newsletter-form {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .newsletter-form input {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      width: 280px;
+      outline: none;
+    }
+    .newsletter-form button {
+      background-color: #1a1a2e;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .newsletter-form button:hover {
+      background-color: #0d0d1a;
+    }
+    .footer {
+      background-color: #0d0d1a;
+      color: #aaa;
+      padding: 40px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    .footer-brand .logo {
+      color: #e94560;
+      font-size: 22px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .footer-brand p {
+      font-size: 13px;
+      margin-top: 10px;
+      max-width: 220px;
+      line-height: 1.7;
+    }
+    .footer-col h4 {
+      color: white;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+    .footer-col ul {
+      list-style: none;
+    }
+    .footer-col ul li {
+      margin-bottom: 8px;
+    }
+    .footer-col ul li a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 13px;
+    }
+    .footer-col ul li a:hover {
+      color: #e94560;
+    }
+    .footer-bottom {
+      background-color: #0d0d1a;
+      text-align: center;
+      padding: 15px;
+      color: #555;
+      font-size: 13px;
+      border-top: 1px solid #1a1a2e;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="#" class="logo">🧭 WanderIndia</a>
+    <ul>
+      <li><a href="#destinations">Destinations</a></li>
+      <li><a href="#why-us">Why Us</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+    </ul>
+    <a href="#newsletter" class="nav-btn">Book Now</a>
+  </nav>
+  <section class="hero">
+    <h1>Discover the <span>Beauty</span> of India</h1>
+    <p>Plan your dream trip across India's most stunning destinations. Affordable packages, expert guides, and memories for life.</p>
+    <div class="hero-buttons">
+      <a href="#destinations" class="btn-main">Explore Destinations</a>
+      <a href="#how" class="btn-outline">How It Works</a>
+    </div>
+  </section>
+  <div class="stats-bar">
+    <div class="stat">
+      <h2>500+</h2>
+      <p>Destinations</p>
+    </div>
+    <div class="stat">
+      <h2>12,000+</h2>
+      <p>Happy Travellers</p>
+    </div>
+    <div class="stat">
+      <h2>8 Years</h2>
+      <p>of Experience</p>
+    </div>
+    <div class="stat">
+      <h2>4.8 ★</h2>
+      <p>Average Rating</p>
+    </div>
+  </div>
+  <section class="destinations" id="destinations">
+    <h2>Popular Destinations</h2>
+    <p class="subtitle">Hand-picked places loved by thousands of travellers</p>
+    <div class="cards-row">
+      <div class="card">
+        <div class="card-img img-kerala">🌴</div>
+        <div class="card-body">
+          <h3>Kerala</h3>
+          <p>Experience the backwaters, lush forests, and peaceful beaches of God's Own Country.</p>
+          <div class="card-footer">
+            <div class="price">₹8,999 <span>/ person</span></div>
+            <a href="#">Book Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img img-rajasthan">🏰</div>
+        <div class="card-body">
+          <h3>Rajasthan</h3>
+          <p>Explore magnificent forts, vibrant culture, and the golden sands of the Thar desert.</p>
+          <div class="card-footer">
+            <div class="price">₹10,499 <span>/ person</span></div>
+            <a href="#">Book Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img img-kashmir">🏔️</div>
+        <div class="card-body">
+          <h3>Kashmir</h3>
+          <p>Breathtaking valleys, snow-covered mountains, and Dal Lake – Heaven on Earth.</p>
+          <div class="card-footer">
+            <div class="price">₹13,999 <span>/ person</span></div>
+            <a href="#">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="why-us" id="why-us">
+    <h2>Why Choose WanderIndia?</h2>
+    <p class="subtitle">We make your travel experience smooth, safe, and unforgettable</p>
+    <div class="features-row">
+      <div class="feature-box">
+        <div class="icon">💰</div>
+        <h3>Best Prices</h3>
+        <p>We offer the most competitive prices with no hidden charges.</p>
+      </div>
+      <div class="feature-box">
+        <div class="icon">🛡️</div>
+        <h3>Safe Travel</h3>
+        <p>Your safety is our priority. All trips are insured and verified.</p>
+      </div>
+      <div class="feature-box">
+        <div class="icon">🧑‍✈️</div>
+        <h3>Expert Guides</h3>
+        <p>Local guides with years of experience to make your trip special.</p>
+      </div>
+      <div class="feature-box">
+        <div class="icon">📞</div>
+        <h3>24/7 Support</h3>
+        <p>Our support team is always available to help you anytime.</p>
+      </div>
+    </div>
+  </section>
+  <section class="how-it-works" id="how">
+    <h2>How It Works</h2>
+    <p class="subtitle">Book your trip in 4 simple steps</p>
+    <div class="steps-row">
+      <div class="step-box">
+        <div class="step-num">1</div>
+        <h3>Choose Destination</h3>
+        <p>Browse and pick your favourite place from our collection.</p>
+      </div>
+      <div class="step-box">
+        <div class="step-num">2</div>
+        <h3>Select Package</h3>
+        <p>Choose a package that fits your budget and travel dates.</p>
+      </div>
+      <div class="step-box">
+        <div class="step-num">3</div>
+        <h3>Make Payment</h3>
+        <p>Pay securely online. UPI, cards, and net banking accepted.</p>
+      </div>
+      <div class="step-box">
+        <div class="step-num">4</div>
+        <h3>Enjoy Your Trip!</h3>
+        <p>Pack your bags, we handle everything else. Have fun!</p>
+      </div>
+    </div>
+  </section>
+  <section class="testimonials" id="reviews">
+    <h2>What Our Travellers Say</h2>
+    <p class="subtitle">Real experiences from real people</p>
+    <div class="review-row">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>"The Kerala trip was absolutely amazing. Everything was planned perfectly. Will definitely book again!"</p>
+        <div class="reviewer">
+          <div class="avatar">👩</div>
+          <div>
+            <div class="name">Ananya Sharma</div>
+            <div class="city">Mumbai</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>"Kashmir was a dream come true. The guide was very helpful and the hotels were great. Highly recommended!"</p>
+        <div class="reviewer">
+          <div class="avatar">👨</div>
+          <div>
+            <div class="name">Ravi Krishnan</div>
+            <div class="city">Chennai</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★☆</div>
+        <p>"Rajasthan trip was well organised. The forts and food were incredible. Great value for money."</p>
+        <div class="reviewer">
+          <div class="avatar">🧑</div>
+          <div>
+            <div class="name">Karthik Nair</div>
+            <div class="city">Bangalore</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="newsletter" id="newsletter">
+    <h2>Get Exclusive Travel Deals</h2>
+    <p>Subscribe to our newsletter and get up to 20% off on your first booking.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="Enter your email address">
+      <button>Subscribe</button>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="footer-brand">
+      <a href="#" class="logo">🧭 WanderIndia</a>
+      <p>Your trusted travel partner for exploring the best of India since 2017.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Destinations</h4>
+      <ul>
+        <li><a href="#">Kerala</a></li>
+        <li><a href="#">Rajasthan</a></li>
+        <li><a href="#">Kashmir</a></li>
+        <li><a href="#">Goa</a></li>
+        <li><a href="#">Manali</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Refund Policy</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025 WanderIndia. All rights reserved. Made with ❤️ for travellers.</p>
+  </div>
+</body>
+</html>

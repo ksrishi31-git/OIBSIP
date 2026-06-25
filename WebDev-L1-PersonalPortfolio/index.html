@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rishi Karthick KS — AI/ML Learning Student</title>
+<meta name="description" content="Portfolio of Rishi Karthick KS, an AI/ML learning student building computer vision, NLP and automation projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy: #080f1e;
+  --navy-2: #0e1628;
+  --card-bg: #111827;
+  --violet: #7c3aed;
+  --violet-l: #a78bfa;
+  --teal: #14b8a6;
+  --slate: #8892a4;
+  --off-white: #eff3f8;
+  --white: #fafbff;
+  --border: rgba(255,255,255,0.07);
+  --display: 'Syne', sans-serif;
+  --body: 'Inter', sans-serif;
+  --radius: 14px;
+  --maxw: 1100px;
+}
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin: 0;
+  background: var(--navy);
+  color: var(--off-white);
+  font-family: var(--body);
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+img, svg{ display:block; max-width:100%; }
+a{ color: inherit; text-decoration: none; }
+ul{ margin:0; padding:0; list-style:none; }
+.mono{
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.grain{ display: none; }
+a:focus-visible, button:focus-visible{
+  outline: 2px solid var(--violet-l);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.nav-wrap{
+  position: sticky; top: 0; z-index: 50;
+  display: flex; justify-content: center;
+  padding: 0;
+}
+.nav{
+  width: 100%;
+  max-width: none;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(8,15,30,0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  padding: 18px 40px;
+}
+.logo{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+.nav-links{
+  display: flex; gap: 6px;
+}
+.nav-link{
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 9px 16px;
+  border-radius: 6px;
+  color: var(--slate);
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.nav-link:hover{ color: var(--white); background: rgba(255,255,255,0.04); }
+.nav-link.active{
+  color: var(--white);
+  background: rgba(124,58,237,0.12);
+}
+.nav-toggle{
+  display: none;
+  width: 38px; height: 38px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+}
+.nav-toggle span{
+  width: 16px; height: 2px; background: var(--off-white); display:block;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.nav-toggle.open span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2){ opacity: 0; }
+.nav-toggle.open span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+.hero{
+  position: relative;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 120px 32px 90px;
+  overflow: hidden;
+}
+.grid-bg{
+  position: absolute;
+  top: -40px; right: -10%;
+  width: 60%; height: 480px;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.8;
+  -webkit-mask-image: radial-gradient(circle at 60% 30%, black 0%, transparent 70%);
+  mask-image: radial-gradient(circle at 60% 30%, black 0%, transparent 70%);
+  z-index: 0;
+}
+.hero-inner{
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+.eyebrow{ display: none; }
+.hero-name{
+  font-family: var(--display);
+  font-size: clamp(2.6rem, 5.6vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin: 0 0 16px;
+  line-height: 1.04;
+}
+.hero-role{
+  font-size: 1.05rem;
+  color: var(--off-white);
+  margin: 0 0 22px;
+  min-height: 1.4em;
+}
+.role-typed{
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--teal);
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+.cursor{
+  display: inline-block;
+  color: var(--violet-l);
+  animation: blink 1s steps(2, start) infinite;
+}
+@keyframes blink{ to{ visibility: hidden; } }
+.hero-badges{ margin-bottom: 22px; }
+.badge{
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--violet-l);
+  background: rgba(124,58,237,0.1);
+  border: 1px solid rgba(124,58,237,0.25);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+.badge .dot{
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 0 3px rgba(20,184,166,0.18);
+}
+.hero-sub{
+  max-width: 46ch;
+  color: var(--slate);
+  font-weight: 300;
+  margin: 0 0 30px;
+}
+.hero-cta{ display: flex; gap: 14px; flex-wrap: wrap; }
+.btn{
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  padding: 13px 26px;
+  border-radius: 6px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+  display: inline-block;
+}
+.btn:hover{ transform: translateY(-2px); }
+.btn-primary{
+  background: var(--violet);
+  color: #fff;
+}
+.btn-primary:hover{ background: #6d28d9; box-shadow: 0 8px 28px rgba(124,58,237,0.4); }
+.btn-ghost{
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--off-white);
+}
+.btn-ghost:hover{ background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.25); }
+.hero-avatar{
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+}
+.avatar-frame{
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  border: 2px solid rgba(124,58,237,0.3);
+  padding: 6px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+}
+.avatar-frame::before{
+  content: "";
+  position: absolute; inset: 10px;
+  border: 1px dashed rgba(124,58,237,0.25);
+  border-radius: 50%;
+}
+.avatar-initials{
+  font-family: var(--display);
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--violet-l), var(--teal));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.02em;
+}
+.avatar-tag{ font-size: 0.7rem; color: var(--slate); }
+.scroll-cue{
+  position: relative; z-index: 1;
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 60px;
+  font-size: 0.78rem;
+  color: var(--slate);
+}
+.scroll-cue span{
+  display: inline-block;
+  animation: nudge 1.8s ease-in-out infinite;
+}
+@keyframes nudge{
+  0%, 100%{ transform: translateY(0); }
+  50%{ transform: translateY(4px); }
+}
+.section{
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 90px 32px;
+  border-top: 1px solid var(--border);
+}
+.section-title{
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  margin: 0 0 40px;
+}
+.reveal{
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.in-view{ opacity: 1; transform: translateY(0); }
+.about-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+.about-text{
+  margin: 0;
+  color: var(--slate);
+  font-weight: 300;
+  font-size: 1.02rem;
+}
+.about-text:first-of-type{ color: var(--off-white); }
+.skills-board{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px 40px;
+}
+.skill-group{
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px 24px;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.skill-group:hover{ border-color: rgba(124,58,237,0.35); transform: translateY(-3px); }
+.skill-group-title{
+  color: var(--violet-l);
+  margin: 0 0 14px;
+}
+.skill-tags{ display: flex; flex-wrap: wrap; gap: 9px; }
+.tag{
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--off-white);
+  background: rgba(124,58,237,0.1);
+  border: 1px solid rgba(124,58,237,0.2);
+  border-radius: 5px;
+  padding: 7px 12px;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+.tag:hover{
+  border-color: var(--teal);
+  background: rgba(20,184,166,0.12);
+  transform: translateY(-2px);
+}
+.project-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+.project-card{
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+.project-card::before{
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--violet), var(--teal));
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.project-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.35);
+  border-color: rgba(124,58,237,0.4);
+}
+.project-card:hover::before{ opacity: 1; }
+.project-top{
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.project-kind{
+  color: var(--teal);
+  background: rgba(20,184,166,0.08);
+  border: 1px solid rgba(20,184,166,0.2);
+  border-radius: 4px;
+  padding: 4px 10px;
+}
+.project-stack{
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--violet-l);
+}
+.project-card h3{
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.12rem;
+  color: var(--white);
+  margin: 0 0 10px;
+}
+.project-card p{
+  color: var(--slate);
+  font-size: 0.93rem;
+  font-weight: 300;
+  margin: 0 0 18px;
+}
+.project-link{
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--off-white);
+  border-bottom: 1px solid var(--violet-l);
+  padding-bottom: 1px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
+.project-link:hover{ color: var(--teal); border-color: var(--teal); }
+.cert-log{
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--card-bg);
+}
+.cert-row{
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s ease;
+}
+.cert-row:last-child{ border-bottom: none; }
+.cert-row:hover{ background: rgba(124,58,237,0.06); }
+.cert-check{
+  color: var(--teal);
+  font-size: 0.85rem;
+}
+.cert-name{ font-size: 0.96rem; color: var(--off-white); }
+.cert-issuer{
+  color: var(--violet-l);
+  white-space: nowrap;
+}
+.contact-box{
+  background: var(--navy-2);
+  color: var(--off-white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 44px;
+}
+.contact-lead{
+  color: var(--slate);
+  font-weight: 300;
+  max-width: 50ch;
+  margin: 0 0 28px;
+  font-size: 1rem;
+}
+.contact-rows{ display: flex; flex-direction: column; gap: 10px; }
+.contact-row{
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.contact-row:hover{
+  background: rgba(124,58,237,0.08);
+  border-color: var(--violet);
+  transform: translateX(4px);
+}
+.contact-icon{
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: rgba(124,58,237,0.12);
+  border: 1px solid rgba(124,58,237,0.25);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--violet-l);
+  flex-shrink: 0;
+}
+.contact-icon svg{ width: 18px; height: 18px; }
+.contact-label{ display: flex; flex-direction: column; gap: 2px; }
+.contact-name{ color: var(--teal); }
+.contact-value{ font-size: 0.98rem; font-weight: 400; }
+.footer{
+  text-align: center;
+  padding: 36px 20px 48px;
+  color: var(--slate);
+  font-size: 0.8rem;
+  font-weight: 300;
+  text-transform: none;
+  letter-spacing: normal;
+}
+@media (max-width: 860px){
+  .hero-inner{ grid-template-columns: 1fr; }
+  .hero-avatar{ order: -1; }
+  .avatar-frame{ width: 150px; height: 150px; }
+  .avatar-initials{ font-size: 2.1rem; }
+  .about-grid{ grid-template-columns: 1fr; }
+  .skills-board{ grid-template-columns: 1fr; }
+  .project-grid{ grid-template-columns: 1fr; }
+  .grid-bg{ width: 90%; right: -20%; }
+}
+@media (max-width: 680px){
+  .nav{ padding: 16px 20px; }
+  .nav-toggle{ display: flex; }
+  .nav-links{
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0; right: 0;
+    background: var(--navy-2);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    padding: 8px 0 16px;
+    gap: 0;
+    display: none;
+  }
+  .nav-links.open{ display: flex; }
+  .nav-link{ padding: 14px 20px; text-align: center; border-radius: 0; }
+  .hero{ padding: 90px 20px 70px; }
+  .section{ padding: 64px 20px; }
+  .contact-box{ padding: 28px; }
+  .cert-row{ grid-template-columns: 26px 1fr; row-gap: 4px; }
+  .cert-issuer{ grid-column: 2; }
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<header class="nav-wrap">
+  <nav class="nav">
+    <a href="#hero" class="logo">RK.</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about" class="nav-link" data-link>about</a></li>
+      <li><a href="#skills" class="nav-link" data-link>skills</a></li>
+      <li><a href="#projects" class="nav-link" data-link>projects</a></li>
+      <li><a href="#certs" class="nav-link" data-link>certifications</a></li>
+      <li><a href="#contact" class="nav-link" data-link>contact</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <section id="hero" class="hero">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1 class="hero-name">Rishi Karthick&nbsp;KS</h1>
+        <p class="hero-role">
+          <span class="mono role-typed" id="roleTyped"></span><span class="cursor" aria-hidden="true">_</span>
+        </p>
+        <div class="hero-badges">
+          <span class="badge"><i class="dot"></i> branch: ai-ml-learning-path</span>
+        </div>
+        <p class="hero-sub">Building small, working things at the intersection of computer vision, language models and everyday problems — currently sharpening the fundamentals one project at a time.</p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary" data-link>view projects</a>
+          <a href="#contact" class="btn btn-ghost" data-link>get in touch</a>
+        </div>
+      </div>
+      <div class="hero-avatar" aria-hidden="true">
+        <div class="avatar-frame">
+          <span class="avatar-initials">RK</span>
+        </div>
+      </div>
+    </div>
+    <a href="#about" class="scroll-cue mono" data-link>scroll <span>↓</span></a>
+  </section>
+  <section id="about" class="section reveal">
+    <h2 class="section-title">A bit about me</h2>
+    <div class="about-grid">
+      <p class="about-text">
+        I'm an AI/ML learning student who likes turning ideas into things that actually run — from a driver-monitoring system built on OpenCV and MediaPipe to a tool that sorts documents using AI. I spend most of my time experimenting with Python, computer vision and prompt engineering, while steadily working through the fundamentals: data structures, algorithms and core ML concepts.
+      </p>
+      <p class="about-text">
+        Outside coursework, I'm drawn to problems with a real-world edge — road safety, food waste, document chaos — and I'd rather ship a rough working prototype than leave an idea on paper. I'm currently deepening my foundation through structured certifications in Generative AI, prompt engineering and applied Python.
+      </p>
+    </div>
+  </section>
+  <section id="skills" class="section reveal">
+    <h2 class="section-title">What I work with</h2>
+    <div class="skills-board">
+      <div class="skill-group">
+        <h3 class="skill-group-title mono">languages</h3>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">C</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">HTML5 / CSS3</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3 class="skill-group-title mono">ai &amp; ml</h3>
+        <div class="skill-tags">
+          <span class="tag">Machine Learning Fundamentals</span>
+          <span class="tag">Computer Vision (OpenCV, MediaPipe)</span>
+          <span class="tag">Prompt Engineering</span>
+          <span class="tag">Generative AI</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3 class="skill-group-title mono">core cs</h3>
+        <div class="skill-tags">
+          <span class="tag">Data Structures &amp; Algorithms</span>
+          <span class="tag">Problem Solving</span>
+          <span class="tag">Git &amp; GitHub</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3 class="skill-group-title mono">tools</h3>
+        <div class="skill-tags">
+          <span class="tag">VS Code</span>
+          <span class="tag">Jupyter Notebook</span>
+          <span class="tag">NumPy / Pandas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="projects" class="section reveal">
+    <h2 class="section-title">Things I've built</h2>
+    <div class="project-grid">
+      <article class="project-card">
+        <div class="project-top">
+          <span class="project-kind mono">computer vision</span>
+          <span class="project-stack mono">Python · OpenCV · MediaPipe</span>
+        </div>
+        <h3>Advanced Driver Monitoring System</h3>
+        <p>An AI-powered driver monitoring system that watches for signs of drowsiness and distraction in real time, aimed at cutting down avoidable road accidents.</p>
+        <a href="https://github.com/ksrishi31-git/Advanced-Driver-Monitoring-System" class="project-link mono" target="_blank" rel="noopener">view on github →</a>
+      </article>
+      <article class="project-card">
+        <div class="project-top">
+          <span class="project-kind mono">computer vision</span>
+          <span class="project-stack mono">Python</span>
+        </div>
+        <h3>Smart Pedestrian Monitoring System</h3>
+        <p>A road-safety project that actively detects pedestrians and triggers real-time alerts for drivers, designed to reduce blind-spot accidents.</p>
+        <a href="https://github.com/ksrishi31-git/Smart-pedestrian-monitoring-system" class="project-link mono" target="_blank" rel="noopener">view on github →</a>
+      </article>
+      <article class="project-card">
+        <div class="project-top">
+          <span class="project-kind mono">ai tools</span>
+          <span class="project-stack mono">HTML · AI</span>
+        </div>
+        <h3>Smart Document Organizer</h3>
+        <p>An AI-based document separator that automatically sorts and organises files, cutting down the manual effort of digging through messy folders.</p>
+        <a href="https://github.com/ksrishi31-git/smart-document-organizer" class="project-link mono" target="_blank" rel="noopener">view on github →</a>
+      </article>
+      <article class="project-card">
+        <div class="project-top">
+          <span class="project-kind mono">social impact</span>
+          <span class="project-stack mono">HTML</span>
+        </div>
+        <h3>Food-Surplus</h3>
+        <p>A real-time food redistribution platform connecting hotels, NGOs, orphanages and volunteers — built to route surplus food to people who need it.</p>
+        <a href="https://github.com/ksrishi31-git/Food-Surplus" class="project-link mono" target="_blank" rel="noopener">view on github →</a>
+      </article>
+      <article class="project-card">
+        <div class="project-top">
+          <span class="project-kind mono">ai assistant</span>
+          <span class="project-stack mono">JavaScript</span>
+        </div>
+        <h3>Biotech AI Assistant</h3>
+        <p>An AI assistant exploring how conversational tools can support biotech-related queries and workflows.</p>
+        <a href="https://github.com/ksrishi31-git/biotech-ai-assistant" class="project-link mono" target="_blank" rel="noopener">view on github →</a>
+      </article>
+    </div>
+  </section>
+  <section id="certs" class="section reveal">
+    <h2 class="section-title">Certifications &amp; learning log</h2>
+    <ul class="cert-log">
+      <li class="cert-row">
+        <span class="cert-check mono">[✓]</span>
+        <span class="cert-name">Data Structures &amp; Algorithms in C</span>
+        <span class="cert-issuer mono">PrepInsta</span>
+      </li>
+      <li class="cert-row">
+        <span class="cert-check mono">[✓]</span>
+        <span class="cert-name">Craft Precise Prompts for AI Models</span>
+        <span class="cert-issuer mono">IBM SkillsBuild</span>
+      </li>
+      <li class="cert-row">
+        <span class="cert-check mono">[✓]</span>
+        <span class="cert-name">Python Essentials 1 &amp; Python Essentials 2</span>
+        <span class="cert-issuer mono">Cisco</span>
+      </li>
+      <li class="cert-row">
+        <span class="cert-check mono">[✓]</span>
+        <span class="cert-name">Artificial Intelligence Fundamentals</span>
+        <span class="cert-issuer mono">IBM SkillsBuild</span>
+      </li>
+      <li class="cert-row">
+        <span class="cert-check mono">[✓]</span>
+        <span class="cert-name">Generative AI Mastermind</span>
+        <span class="cert-issuer mono">Outskill</span>
+      </li>
+    </ul>
+  </section>
+  <section id="contact" class="section reveal">
+    <h2 class="section-title">Let's talk</h2>
+    <div class="contact-box">
+      <p class="contact-lead">I'm always glad to connect with people learning or working in AI/ML — feel free to reach out.</p>
+      <div class="contact-rows">
+        <a class="contact-row" href="mailto:ksrishi31@gmail.com" data-link>
+          <span class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          </span>
+          <span class="contact-label">
+            <span class="contact-name mono">email</span>
+            <span class="contact-value">ksrishi31@gmail.com</span>
+          </span>
+        </a>
+        <a class="contact-row" href="https://www.linkedin.com/in/rishi-karthick-ks-026b00380" target="_blank" rel="noopener" data-link>
+          <span class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v7M7 7.5v.01M12 17v-4.5c0-1.5 1-2.5 2.3-2.5 1.3 0 2.2 1 2.2 2.5V17"/></svg>
+          </span>
+          <span class="contact-label">
+            <span class="contact-name mono">linkedin</span>
+            <span class="contact-value">rishi-karthick-ks</span>
+          </span>
+        </a>
+        <a class="contact-row" href="https://github.com/ksrishi31-git" target="_blank" rel="noopener" data-link>
+          <span class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.66-.22.66-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.4 9.4 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.35 4.68-4.58 4.92.36.32.68.94.68 1.9v2.82c0 .26.16.58.67.48A10 10 0 0 0 12 2z"/></svg>
+          </span>
+          <span class="contact-label">
+            <span class="contact-name mono">github</span>
+            <span class="contact-value">ksrishi31-git</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <p class="mono">© 2026 Rishi Karthick KS — built with HTML, CSS &amp; a bit of JS</p>
+</footer>
+<script>
+// =====================================================================
+// RK. Portfolio — small interactive enhancements
+// =====================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const roleEl = document.getElementById('roleTyped');
+  const roleText = 'AI / ML Learning Student';
+  let i = 0;
+  function typeRole(){
+    if (i <= roleText.length){
+      roleEl.textContent = roleText.slice(0, i);
+      i++;
+      setTimeout(typeRole, 45);
+    }
+  }
+  typeRole();
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  document.querySelectorAll('[data-link]').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+  const sections = document.querySelectorAll('main section[id]');
+  const navAnchors = document.querySelectorAll('.nav-link');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        navAnchors.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  sections.forEach(s => navObserver.observe(s));
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => revealObserver.observe(el));
+});
+</script>
+</body>
+</html>

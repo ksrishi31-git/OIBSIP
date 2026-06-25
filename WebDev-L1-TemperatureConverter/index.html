@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Converter</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    .navbar {
+      background-color: #0f3460;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar .logo {
+      color: #00b4d8;
+      font-size: 22px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .navbar p {
+      color: #aaa;
+      font-size: 14px;
+    }
+    .hero {
+      background-color: #0a2647;
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+    }
+    .hero h1 {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+    .hero h1 span {
+      color: #00b4d8;
+    }
+    .hero p {
+      color: #aaa;
+      font-size: 16px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .converter-section {
+      padding: 60px 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .converter-card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 40px;
+      width: 100%;
+      max-width: 500px;
+    }
+    .converter-card h2 {
+      font-size: 22px;
+      color: #0f3460;
+      margin-bottom: 25px;
+      text-align: center;
+      border-bottom: 3px solid #00b4d8;
+      padding-bottom: 12px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      color: #0f3460;
+      margin-bottom: 7px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      outline: none;
+      font-family: Arial, sans-serif;
+    }
+    .form-group input:focus {
+      border-color: #00b4d8;
+    }
+    .form-group select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 15px;
+      outline: none;
+      background-color: white;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+    }
+    .form-group select:focus {
+      border-color: #00b4d8;
+    }
+    .error-msg {
+      color: #00b4d8;
+      font-size: 13px;
+      margin-top: 5px;
+      display: none;
+    }
+    .convert-btn {
+      width: 100%;
+      padding: 14px;
+      background-color: #00b4d8;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      font-family: Arial, sans-serif;
+    }
+    .convert-btn:hover {
+      background-color: #0096c7;
+    }
+    .result-box {
+      margin-top: 25px;
+      background-color: #f9f9f9;
+      border: 2px solid #eee;
+      border-radius: 10px;
+      padding: 25px;
+      text-align: center;
+      display: none;
+    }
+    .result-box.show {
+      display: block;
+    }
+    .result-box p {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 8px;
+    }
+    .result-box .result-value {
+      font-size: 42px;
+      font-weight: bold;
+      color: #00b4d8;
+      margin-bottom: 5px;
+    }
+    .result-box .result-unit {
+      font-size: 16px;
+      color: #555;
+    }
+    .result-box .all-conversions {
+      margin-top: 18px;
+      border-top: 1px solid #eee;
+      padding-top: 15px;
+    }
+    .result-box .all-conversions h4 {
+      font-size: 13px;
+      color: #aaa;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .conversion-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #555;
+      padding: 6px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .conversion-row:last-child {
+      border-bottom: none;
+    }
+    .conversion-row span {
+      font-weight: bold;
+      color: #0f3460;
+    }
+    .reset-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: transparent;
+      color: #aaa;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 12px;
+      font-family: Arial, sans-serif;
+    }
+    .reset-btn:hover {
+      border-color: #0f3460;
+      color: #0f3460;
+    }
+    .info-section {
+      padding: 0 20px 60px 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .info-grid {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 500px;
+      width: 100%;
+    }
+    .info-card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      border-top: 4px solid #00b4d8;
+    }
+    .info-card .icon {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+    .info-card h3 {
+      font-size: 14px;
+      color: #0f3460;
+      margin-bottom: 5px;
+    }
+    .info-card p {
+      font-size: 12px;
+      color: #888;
+      line-height: 1.5;
+    }
+    .footer {
+      background-color: #0f3460;
+      text-align: center;
+      padding: 18px;
+      color: #555;
+      font-size: 13px;
+    }
+    .footer span {
+      color: #00b4d8;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="#" class="logo">🌡️ TempConvert</a>
+    <p>Oasis Infobyte — Task 3 | By Rishi</p>
+  </nav>
+  <section class="hero">
+    <h1>Temperature <span>Converter</span></h1>
+    <p>Convert temperatures between Celsius, Fahrenheit, and Kelvin instantly.</p>
+  </section>
+  <section class="converter-section">
+    <div class="converter-card">
+      <h2>🌡️ Convert Temperature</h2>
+      <div class="form-group">
+        <label for="tempInput">Enter Temperature:</label>
+        <input
+          type="number"
+          id="tempInput"
+          placeholder="e.g. 100"
+        />
+        <p class="error-msg" id="errorMsg">⚠️ Please enter a valid number!</p>
+      </div>
+      <div class="form-group">
+        <label for="unitSelect">Select Input Unit:</label>
+        <select id="unitSelect">
+          <option value="celsius">°C — Celsius</option>
+          <option value="fahrenheit">°F — Fahrenheit</option>
+          <option value="kelvin">K — Kelvin</option>
+        </select>
+      </div>
+      <button class="convert-btn" onclick="convertTemperature()">
+        Convert →
+      </button>
+      <div class="result-box" id="resultBox">
+        <p>Converted Temperature:</p>
+        <div class="result-value" id="mainResult">--</div>
+        <div class="result-unit" id="mainUnit"></div>
+        <div class="all-conversions">
+          <h4>All Conversions</h4>
+          <div class="conversion-row">
+            <p>🌡️ Celsius</p>
+            <span id="celsiusResult">--</span>
+          </div>
+          <div class="conversion-row">
+            <p>🌡️ Fahrenheit</p>
+            <span id="fahrenheitResult">--</span>
+          </div>
+          <div class="conversion-row">
+            <p>🌡️ Kelvin</p>
+            <span id="kelvinResult">--</span>
+          </div>
+        </div>
+      </div>
+      <button class="reset-btn" onclick="resetForm()">
+        ↺ Reset
+      </button>
+    </div>
+  </section>
+  <section class="info-section">
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="icon">🧊</div>
+        <h3>Water Freezes</h3>
+        <p>0°C = 32°F = 273.15 K</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">♨️</div>
+        <h3>Water Boils</h3>
+        <p>100°C = 212°F = 373.15 K</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">🌡️</div>
+        <h3>Body Temp</h3>
+        <p>37°C = 98.6°F = 310.15 K</p>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <p>© 2025 <span>Rishi</span> — Oasis Infobyte Task 3 | Made with HTML, CSS & JavaScript</p>
+  </footer>
+  <script>
+    function convertTemperature() {
+      var inputVal = document.getElementById("tempInput").value;
+      var unit     = document.getElementById("unitSelect").value;
+      var errorMsg = document.getElementById("errorMsg");
+      var resultBox = document.getElementById("resultBox");
+      if (inputVal === "" || isNaN(inputVal)) {
+        errorMsg.style.display = "block";
+        resultBox.classList.remove("show");
+        return;
+      }
+      errorMsg.style.display = "none";
+      var temp = parseFloat(inputVal);
+      var celsius, fahrenheit, kelvin;
+      if (unit === "celsius") {
+        celsius    = temp;
+        fahrenheit = (temp * 9/5) + 32;
+        kelvin     = temp + 273.15;
+      }
+      else if (unit === "fahrenheit") {
+        celsius    = (temp - 32) * 5/9;
+        fahrenheit = temp;
+        kelvin     = celsius + 273.15;
+      }
+      else if (unit === "kelvin") {
+        celsius    = temp - 273.15;
+        fahrenheit = (celsius * 9/5) + 32;
+        kelvin     = temp;
+      }
+      celsius    = Math.round(celsius    * 100) / 100;
+      fahrenheit = Math.round(fahrenheit * 100) / 100;
+      kelvin     = Math.round(kelvin     * 100) / 100;
+      var mainVal, mainUnit;
+      if (unit === "celsius") {
+        mainVal  = fahrenheit + " °F";
+        mainUnit = "( also = " + kelvin + " K )";
+      }
+      else if (unit === "fahrenheit") {
+        mainVal  = celsius + " °C";
+        mainUnit = "( also = " + kelvin + " K )";
+      }
+      else {
+        mainVal  = celsius + " °C";
+        mainUnit = "( also = " + fahrenheit + " °F )";
+      }
+      document.getElementById("mainResult").textContent    = mainVal;
+      document.getElementById("mainUnit").textContent      = mainUnit;
+      document.getElementById("celsiusResult").textContent    = celsius + " °C";
+      document.getElementById("fahrenheitResult").textContent = fahrenheit + " °F";
+      document.getElementById("kelvinResult").textContent     = kelvin + " K";
+      resultBox.classList.add("show");
+    }
+    function resetForm() {
+      document.getElementById("tempInput").value = "";
+      document.getElementById("unitSelect").value = "celsius";
+      document.getElementById("errorMsg").style.display = "none";
+      document.getElementById("resultBox").classList.remove("show");
+    }
+    document.getElementById("tempInput").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        convertTemperature();
+      }
+    });
+  </script>
+</body>
+</html>
